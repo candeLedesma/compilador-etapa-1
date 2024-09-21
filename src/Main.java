@@ -30,7 +30,7 @@ public class Main {
                     catchError = true;
                     manejarExcepcionLexica(e);
                 }
-            } while (token != null && !token.getId().equals("EOF"));
+            } while ((token != null && !token.getId().equals("EOF")) || token == null);
 
             if (!catchError) {
                 System.out.println(msjSinErrores());
