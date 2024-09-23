@@ -253,18 +253,15 @@ public class AnalizadorLexico {
 
     private Token isChar() throws IOException, ExcepcionLexica {
         if (caracterActual == '\\') {// barra
-            System.out.println("entro 1");
             actualizarCaracterLexema();
             if(caracterActual == '\''){
                 actualizarCaracterLexema();
             }
         }
         if (caracterActual != sourceManager.END_OF_FILE && caracterActual != '\n' && caracterActual != '\'') {
-            System.out.println("entro 2");
             actualizarCaracterLexema();
         }
         if (caracterActual == '\'') { //cierrre char
-            System.out.println("entro 3");
             actualizarCaracterLexema();
             return new Token("charLiteral", lexema, sourceManager.getLineNumber());
         } else {//excepcion char
