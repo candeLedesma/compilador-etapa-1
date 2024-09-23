@@ -16,7 +16,10 @@ identVar IdentClass
 
 123
 "hola"
-'c' '\n'  '\\' '\''
+'c'
+        '\n'
+        '\\'
+        '\''
 
         /* Operadores **/
         ( ) { } ; , . :
