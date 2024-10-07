@@ -30,6 +30,7 @@ public class PalabraClave {
         PALABRAS_CLAVE.put("public", "pr_public");
         PALABRAS_CLAVE.put("var", "pr_var");
         PALABRAS_CLAVE.put("static", "pr_static");
+        PALABRAS_CLAVE.put("default", "pr_default");
     }
 
     public static boolean esPalabraClave(String lexema) {

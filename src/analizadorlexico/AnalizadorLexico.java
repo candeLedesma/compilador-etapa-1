@@ -92,7 +92,6 @@ public class AnalizadorLexico {
     }
 
     private Token s5() throws IOException, ExcepcionLexica {
-
         if (Character.isDigit(caracterActual)) {
             actualizarCaracterLexema();
             return s5();
@@ -102,10 +101,24 @@ public class AnalizadorLexico {
                 actualizarCaracterLexema();
                 throw new ExcepcionFloat(getLexemaAnterior(), lineNumberAnterior, indexAnterior, line);
             }
-            return new Token("floatLiteral", lexema, sourceManager.getLineNumber());
+            if(outOfRangeFloat()){
+                throw new ExcepcionFloat(getLexemaAnterior(), lineNumberAnterior, indexAnterior, line);
+            }else{
+                return new Token("floatLiteral", lexema, sourceManager.getLineNumber());
+            }
         }
     }
 
+    private boolean outOfRangeFloat() throws IOException {
+        float num = Float.parseFloat(lexema);
+        boolean toReturn = false;
+        if(num == Float.POSITIVE_INFINITY || num == Float.NEGATIVE_INFINITY || num == Float.NaN || num < Float.MIN_VALUE || num > Float.MAX_VALUE) {
+            guardarEstado();
+            actualizarCaracterLexema();
+            toReturn = true;
+        }
+        return toReturn;
+    }
 
 
     private Token estadoInicial() throws ExcepcionLexica, IOException {
