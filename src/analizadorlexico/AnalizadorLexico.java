@@ -282,6 +282,11 @@ public class AnalizadorLexico {
     }
 
     private Token isChar() throws IOException, ExcepcionLexica {
+        if (caracterActual == '\''){
+            guardarEstado();
+            actualizarCaracterLexema();
+            throw new ExcepcionLexica(getLexemaAnterior(), lineNumberAnterior, indexAnterior, line);
+        }
         if (caracterActual == '\\') {// barra
             actualizarCaracterLexema();
             if(caracterActual == '\''){
