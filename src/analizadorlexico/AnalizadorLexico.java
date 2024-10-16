@@ -101,23 +101,40 @@ public class AnalizadorLexico {
                 actualizarCaracterLexema();
                 throw new ExcepcionFloat(getLexemaAnterior(), lineNumberAnterior, indexAnterior, line);
             }
+
             if(outOfRangeFloat()){
-                throw new ExcepcionFloat(getLexemaAnterior(), lineNumberAnterior, indexAnterior, line);
-            }else{
-                return new Token("floatLiteral", lexema, sourceManager.getLineNumber());
+                throw new ExcepcionFloat(getLexemaAnterior(), lineNumberAnterior, indexAnterior, line, "fuera de rango");
             }
+
+            return new Token("floatLiteral", lexema, sourceManager.getLineNumber());
         }
     }
 
     private boolean outOfRangeFloat() throws IOException {
         float num = Float.parseFloat(lexema);
-        boolean toReturn = false;
-        if(num == Float.POSITIVE_INFINITY || num == Float.NEGATIVE_INFINITY || num == Float.NaN || num < Float.MIN_VALUE || num > Float.MAX_VALUE) {
+
+        if(Float.isInfinite(num) || Float.isNaN(num)){
+            System.out.println("el numero "+lexema+" es infinito");
             guardarEstado();
             actualizarCaracterLexema();
-            toReturn = true;
+            return true;
         }
-        return toReturn;
+
+        if(num == 0.0){
+            if((lexema.charAt(0) == '0' && lexema.charAt(1) == '.') || (lexema.charAt(0) == '.' && lexema.charAt(1) == '0') || (lexema.charAt(0) == '0' && lexema.charAt(1) == 'e') || (lexema.charAt(0) == '0' && lexema.charAt(1) == 'E')){
+                return false;
+            }
+        }
+
+
+        if( (num < Float.MIN_VALUE || num > Float.MAX_VALUE)){
+            System.out.println("el numero "+lexema+" esta fuera de rango");
+            guardarEstado();
+            actualizarCaracterLexema();
+            return true;
+        }
+
+        return false;
     }
 
 

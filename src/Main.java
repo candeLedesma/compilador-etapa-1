@@ -28,13 +28,14 @@ public class Main {
                     System.out.println(mostrarToken(token));
                 } catch (ExcepcionLexica e) {
                     manejarExcepcionLexica(e);
-                    System.out.println(msjConErrores());
                     catchError = true;
                 }
             } while (token == null || !token.getId().equals("EOF"));
 
             if (!catchError) {
                 System.out.println(msjSinErrores());
+            }else{
+                System.out.println(msjConErrores());
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found - " + e.getMessage());
@@ -61,8 +62,10 @@ public class Main {
     }
 
     private static void manejarExcepcionLexica(ExcepcionLexica e) {
-        System.out.println(e.getMessage());
         System.out.println(e.getErrorMessage());
+
+        System.out.println(e.getMessage());
+
 
         String detalle = "Detalle: ";
         System.out.println(detalle + e.getLine());
