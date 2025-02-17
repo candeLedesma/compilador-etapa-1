@@ -1,7 +1,7 @@
 # Compiler - lexical analyzer
 
 ## Project Description
-This project corresponds to the first stage of a compiler developed as part of the **Compilers and Interpreters** course at the **National University of the South**. The goal of this phase is to implement a **lexical analyzer**, which processes a source code, identifies and categorizes different tokens of the language, and properly manages lexical errors.
+This project corresponds to the first stage of a compiler developed as part of the **Compilers and Interpreters** course at the **Universidad Nacional del sur**. The goal of this phase is to implement a **lexical analyzer**, which processes a source code, identifies and categorizes different tokens of the language, and properly manages lexical errors.
 
 ## Key Features
 - **Token recognition:** Identification of keywords, identifiers, literals, and operators.
